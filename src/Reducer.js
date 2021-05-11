@@ -3,7 +3,7 @@ import { ADD, DELETE, CHANGESTATE, UPDATETASK } from "./actions/types"
 
 
 let incrimentId = 3;
-const initState =[
+const initState = [
     {
         id: 1,
         task: "read a boock",
@@ -17,39 +17,39 @@ const initState =[
 ]
 
 const Reducer = (state = initState, action) => {
-     
+
     switch (action.type) {
         case ADD:
-           
+
 
             return [
 
                 ...state,
                 {
-                    id:  incrimentId++ ,
+                    id: incrimentId++,
 
                     task: action.payload,
                     isComplete: false
                 }
             ]
-         case DELETE:
+        case DELETE:
             return [
-                ...state.filter(tdo => tdo.id !== action.payload.id) 
+                ...state.filter(tdo => tdo.id !== action.payload.id)
             ]
-        
-        
-   
-         case UPDATETASK:
+
+
+
+        case UPDATETASK:
             return [
                 ...state.map(item => (item.id === action.payload.id ? { id: action.payload.id, task: action.payload.task, isComplete: !action.payload.isComplete } : item))
-         
-             ]
-           
-         case CHANGESTATE:
-             return [
-...state.map(item => (item.id === action.payload.id ?  {id:action.payload.id,task:action.payload.task,isComplete:!action.payload.isComplete} : item))                
-             ]
- 
+
+            ]
+
+        case CHANGESTATE:
+            return [
+                ...state.map(item => (item.id === action.payload.id ? { id: action.payload.id, task: action.payload.task, isComplete: !action.payload.isComplete } : item))
+            ]
+
 
         default:
             return state

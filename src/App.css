@@ -33,12 +33,17 @@ h1 {
 }
 
 .complete {
-  text-decoration: line-through;
-  opacity: 0.4;
+  text-decoration: line-through black ;
+
+ opacity: 0.4;
+ pointer-events: none;
 }
 
 .todo-form {
-  margin-bottom: 32px;
+  margin-bottom: 12px;
+  align-items: center;
+  justify-content: space-between;
+
 }
 
 .todo-input {
@@ -152,33 +157,40 @@ h1 {
 
 
 
-
+.formfilter{
+  display:inline-flex;
+  align-items: center;
+  justify-content: space-between;
+margin-left: 18px;
+}
 
 
 * {
   box-sizing: border-box;
 }
 :root {
-  --primary: #de4b3e;
-  --secondary: #c74237;
+  --primary: #d0400c;
+  --secondary: #c05f2b;
 }
 .dropdown {
-  width: 40px;
-  height: 15px;
-
-
+  
+  width: 70px;
+  
+  margin-left: 10px;
   position: relative;
   color: white;
   text-transform: uppercase;
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: 12px;
+ 
   border-radius: 4px;
 }
 .dropdown__select {
   border-radius: inherit;
+  height: 43px;
+
 }
 .dropdown__list {
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   position: absolute;
   top: 100%;
   left: 0;
@@ -199,8 +211,8 @@ h1 {
 }
 .dropdown__select,
 .dropdown__item {
-  width: 40px;
- /* padding: 3rem;*/
+  width: 100%;
+  padding: 10px;
   background-color: var(--primary);
   display: flex;
   align-items: center;

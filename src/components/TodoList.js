@@ -1,64 +1,16 @@
-import React, { useState } from 'react';
-import TodoForm from './TodoForm';
 import Todo from './Todo';
 import { useSelector } from 'react-redux';
 
 function TodoList() {
- /* const [todos, setTodos] = useState([]);
-
-  const addTodo = todo => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
-      return;
-    }
-
-    const newTodos = [todo, ...todos];
-
-    setTodos(newTodos);
-    console.log(...todos);
-  };
-
-  const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
-      return;
-    }
-
-    setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)));
-  };
-
-  const removeTodo = id => {
-    const removedArr = [...todos].filter(todo => todo.id !== id);
-
-    setTodos(removedArr);
-  };
-
-  const completeTodo = id => {
-    let updatedTodos = todos.map(todo => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
-  };
-*/
-
-  const tasks = useSelector(state => state.todoReducer)
-    
-    const filterTodo=useSelector((state) => state.filterReducer)
-console.log('filter',filterTodo)
-  return (
+  const todos = useSelector(state => state.todoReducer)
+  const filterTodo = useSelector((state) => state.filterReducer)
+  let filtred = ''
+  filterTodo[0] === '' ? filtred = todos : filtred = [...todos.filter(tdo => tdo.isComplete === filterTodo[0])]
+  return filtred.map((todo, index) => (
     <>
-      <h1>What's the Plan for Today?</h1>
-      <TodoForm  />
-      <Todo todos={tasks}/>
-      {/* <Todo
-        todos={task.count}
-        completeTodo={completeTodo}
-        removeTodo={removeTodo}
-        updateTodo={updateTodo}
-      /> */}
+      <Todo todo={todo} index={index} />
     </>
-  );
+  ));
 }
 
 export default TodoList;

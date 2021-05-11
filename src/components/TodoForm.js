@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { RiFilter2Line, RiCheckboxCircleLine } from 'react-icons/ri';
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
 import { add, updateTask } from "../actions/Actions.js";
 
 import { filterTodo } from "../actions/Actions.js";
@@ -9,7 +9,6 @@ function TodoForm(props) {
 
   const dispatch = useDispatch();
   const [newTask, setNewtask] = useState(props.edit ? props.edit.task : '');
-  //  const task = props.edit ? props.edit.task : ''
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -31,7 +30,6 @@ function TodoForm(props) {
     setNewtask('')
   };
 
-
   const handleUpdate = e => {
     if (!newTask || /^\s*$/.test(newTask)) {
       return;
@@ -42,10 +40,6 @@ function TodoForm(props) {
     setNewtask('')
   };
 
-
-
-
-  const filterTodos = useSelector(state => state.filterReducer)
 
   return (
 
@@ -67,7 +61,7 @@ function TodoForm(props) {
           </button>
         </>
       ) : (
-        <>
+        <div className="formfilter">
           <input
             placeholder='Add a todo'
             value={newTask}
@@ -80,50 +74,26 @@ function TodoForm(props) {
           <button className='todo-button' onClick={handleSubmit}>
             Add tod
            </button>
-           
-          {/* <button className='todo-button' onClick={() => dispatch(filterTodo(true))}>
-            filter           </button> 
-          
-            <div className="dropdown">
-      <div className="dropdown__select">
-        <span className="dropdown__selected"><RiFilter2Line onClick='#'
-          className='delete-icon'
-        /></span>
-        <i class="fa fa-caret-down dropdown__caret"></i>
+           <div class="dropdown">
+      <div class="dropdown__select">
+        <span class="dropdown__selected">Filter</span>
       </div>
       <ul class="dropdown__list">
-
-        
-        <li class="dropdown__item">
-        <RiCheckboxCircleLine onClick={() => dispatch(filterTodo(''))}
-          className='delete-icon'
-        />
-          <i class="fa fa-plus-circle dropdown__icon"></i>
+        <li class="dropdown__item" onClick={() => dispatch(filterTodo(''))}>
+          <span class="dropdown__text"  >All</span>        
         </li>
-        
-        <li class="dropdown__item">
-        <RiCheckboxCircleLine onClick={() => dispatch(filterTodo(true))}
-          className='delete-icon'
-        />
-          <i class="fa fa-plus-circle dropdown__icon"></i>
+        <li class="dropdown__item" onClick={() => dispatch(filterTodo(true))}>
+          <span class="dropdown__text" >Done</span>
+        </li>
+        <li class="dropdown__item" onClick={() => dispatch(filterTodo(false))}>
+          <span class="dropdown__text" >Not</span>
         </li>
 
-
-         <li class="dropdown__item">
-        <RiCheckboxCircleLine onClick={() => dispatch(filterTodo(false))}
-          className='delete-icon'
-        />
-          <i class="fa fa-plus-circle dropdown__icon"></i>
-        </li>
-
-{/*         
-        <li class="dropdown__item">
-          <span class="dropdown__text">Logout</span>
-          <i class="fa fa-circle dropdown__icon"></i>
-        </li> 
       </ul>
-    </div>  */}
-        </>
+    </div>
+
+        </div>
+        
       )}
 
     </div>
